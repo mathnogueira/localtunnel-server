@@ -14,8 +14,8 @@ const debug = Debug('localtunnel:server');
 const getEndpointIps = (request) => {
     // request.headers['x-forwarded-for'] could be a comma separated list of IPs (if client is behind proxies)
     // TODO: change this to use request-ip package or something better to prevent x-forwarded-for spoofing?
-    return request.headers['x-forwarded-for'] || request.ip
-}
+    return request.headers['x-forwarded-for'] || request.ip;
+};
 
 export default function (opt) {
     opt = opt || {};
@@ -167,8 +167,11 @@ export default function (opt) {
 
         const client = manager.getClient(clientId);
         if (!client) {
-            res.statusCode = 404;
-            res.end('404');
+            // res.statusCode = 523;
+            // res.end('523 -  Origin tunnel is unreachable');
+            res.statusCode = 503;
+            res.setHeader('X-Localtunnel-Status', 'Tunnel Unavailable');
+            res.end('503 - Tunnel Unavailable');
             return;
         }
 
