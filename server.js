@@ -4,7 +4,7 @@ import tldjs from 'tldjs';
 import Debug from 'debug';
 import http from 'http';
 import { hri } from 'human-readable-ids';
-import humanId from 'human-id';
+import { humanId } from 'human-id';
 import Router from 'koa-router';
 
 import ClientManager from './lib/ClientManager.js';
